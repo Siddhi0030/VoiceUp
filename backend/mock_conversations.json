@@ -1,0 +1,204 @@
+[
+  {
+    "conversation_id": 1,
+    "messages": [
+      {
+        "sender": "agent",
+        "text": "Hi John! Welcome to VoiceUp. How can I help you today?"
+      },
+      {
+        "sender": "customer",
+        "text": "My internet is out. Again!"
+      },
+      {
+        "sender": "agent",
+        "text": "I'm really sorry about the repeated issues, John. Let me check this for you."
+      },
+      {
+        "sender": "agent",
+        "text": "I've reset your connection. Can you confirm it's working?"
+      },
+      {
+        "sender": "customer",
+        "text": "Yes, it's back. Appreciate it!"
+      }
+    ]
+  },
+  {
+    "conversation_id": 2,
+    "messages": [
+      {
+        "sender": "agent",
+        "text": "Hello, how can I assist you?"
+      },
+      {
+        "sender": "customer",
+        "text": "The signal drops every time I make a Zoom call."
+      },
+      {
+        "sender": "agent",
+        "text": "That's unusual. Can you try moving closer to the router?"
+      }
+    ]
+  },
+  {
+    "conversation_id": 3,
+    "messages": [
+      {
+        "sender": "agent",
+        "text": "Good day, how may I help you today?"
+      },
+      {
+        "sender": "customer",
+        "text": "My speed is very low."
+      },
+      {
+        "sender": "agent",
+        "text": "Guaranteed fix if you restart the router!"
+      },
+      {
+        "sender": "customer",
+        "text": "Okay. It better work this time."
+      }
+    ]
+  },
+  {
+    "conversation_id": 4,
+    "messages": [
+      {
+        "sender": "agent",
+        "text": "VoiceUp Support here. What seems to be the issue?"
+      },
+      {
+        "sender": "customer",
+        "text": "I'm getting random disconnections every night."
+      },
+      {
+        "sender": "agent",
+        "text": "Let me investigate the logs."
+      },
+      {
+        "sender": "customer",
+        "text": "Please hurry."
+      },
+      {
+        "sender": "agent",
+        "text": "Try switching off the modem for 30 seconds."
+      }
+    ]
+  },
+  {
+    "conversation_id": 5,
+    "messages": [
+      {
+        "sender": "agent",
+        "text": "Hi Priya! What can I help you with today?"
+      },
+      {
+        "sender": "customer",
+        "text": "Nothing, just wanted to say thanks. The new router is amazing!"
+      },
+      {
+        "sender": "agent",
+        "text": "So happy to hear that"
+      },
+      {
+        "sender": "customer",
+        "text": "Bye!"
+      }
+    ]
+  },
+  {
+    "conversation_id": 6,
+    "messages": [
+      {
+        "sender": "agent",
+        "text": "Hello, this is support. What do you need?"
+      },
+      {
+        "sender": "customer",
+        "text": "That was rude. Anyway, my net's dead."
+      },
+      {
+        "sender": "agent",
+        "text": "Try waiting, it might fix itself."
+      }
+    ]
+  },
+  {
+    "conversation_id": 7,
+    "messages": [
+      {
+        "sender": "agent",
+        "text": "Hi Alex, welcome back! What's the issue today?"
+      },
+      {
+        "sender": "customer",
+        "text": "My connection is fine now, just wanted to test your response time"
+      },
+      {
+        "sender": "agent",
+        "text": "Haha, fair enough! Glad things are working!"
+      }
+    ]
+  },
+  {
+    "conversation_id": 8,
+    "messages": [
+      {
+        "sender": "agent",
+        "text": "Good evening, how can I assist?"
+      },
+      {
+        "sender": "customer",
+        "text": "Upload speed is near zero."
+      },
+      {
+        "sender": "agent",
+        "text": "Sorry about that! We're running diagnostics now."
+      },
+      {
+        "sender": "agent",
+        "text": "Please retry after 10 mins and let me know if it improves."
+      },
+      {
+        "sender": "customer",
+        "text": "Will do. Thanks for the quick reply!"
+      }
+    ]
+  },
+  {
+    "conversation_id": 9,
+    "messages": [
+      {
+        "sender": "agent",
+        "text": "Hey! How can I help today?"
+      },
+      {
+        "sender": "customer",
+        "text": "Are you serious? It's been 3 days of issues and no response!"
+      }
+    ]
+  },
+  {
+    "conversation_id": 10,
+    "messages": [
+      {
+        "sender": "agent",
+        "text": "Hi Ravi, welcome to VoiceUp. What's troubling you?"
+      },
+      {
+        "sender": "customer",
+        "text": "Router isn't connecting to the app."
+      },
+      {
+        "sender": "agent",
+        "text": "Apologies, Ravi. We'll sort it out."
+      },
+      {
+        "sender": "agent",
+        "text": "Can you check if Bluetooth is on?"
+      }
+    ]
+  }
+]

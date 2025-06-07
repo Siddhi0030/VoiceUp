@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoiceUp Analytics Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container py-5">
+    <h2 class="mb-4">📊 VoiceUp AI Analytics Dashboard</h2>
+
+    <!-- Conversation Selection -->
+    <div class="mb-4">
+      <label for="conversationSelect" class="form-label">Select Conversation:</label>
+      <select class="form-select" id="conversationSelect">
+        <option disabled selected>Loading...</option>
+      </select>
+    </div>
+
+    <!-- Load Button -->
+    <button id="loadBtn" class="btn btn-primary mb-4" disabled>Load Conversation</button>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="text-center my-4" style="display: none;">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p>Loading conversation...</p>
+    </div>
+
+    <!-- Chat Section -->
+    <div class="mb-4">
+      <h4>💬 Conversation</h4>
+      <div id="chatContainer" class="d-flex flex-col"></div>
+    </div>
+
+    <!-- Compliance Section -->
+    <div class="mb-4">
+      <h4>✅ Compliance Summary</h4>
+      <p><strong>Compliance Score:</strong> <span id="complianceScore">--</span>%</p>
+      <ul id="complianceList" class="list-group"></ul>
+    </div>
+
+    <!-- Emotion Chart -->
+    <div class="mb-4">
+      <h4>📊 Emotion Distribution</h4>
+      <img id="emotionChart" src="" alt="Emotion Chart"
+        style="max-width: 100%; border: 1px solid #ccc; padding: 5px;" />
+    </div>
+  </div>
+
+  <script>
+    const rulesMap = {
+      1: "Greet the customer at the beginning",
+      2: "Apologize if the customer expresses frustration",
+      3: "Confirm resolution before ending the chat",
+      4: "Avoid making unsupported claims",
+      5: "Personalize by name if known"
+    };
+
+    const conversationSelect = document.getElementById("conversationSelect");
+    const loadBtn = document.getElementById("loadBtn");
+    const chatContainer = document.getElementById("chatContainer");
+    const complianceList = document.getElementById("complianceList");
+    const complianceScore = document.getElementById("complianceScore");
+    const loadingSpinner = document.getElementById("loadingSpinner");
+
+    let selectedConversationId = null;
+
+    // Fetch conversation list
+    fetch("http://localhost:8000/conversations")
+      .then(res => res.json())
+      .then(data => {
+        conversationSelect.innerHTML = `<option disabled selected>Select a conversation</option>`;
+        data.forEach(c => {
+          const opt = document.createElement("option");
+          opt.value = c.conversation_id;
+          opt.textContent = `Conversation ${c.conversation_id}`;
+          conversationSelect.appendChild(opt);
+        });
+        conversationSelect.disabled = false;
+      });
+
+    conversationSelect.addEventListener("change", () => {
+      selectedConversationId = conversationSelect.value;
+      loadBtn.disabled = false;
+    });
+
+    loadBtn.addEventListener("click", () => {
+      if (!selectedConversationId) return;
+
+      // Reset UI
+      chatContainer.innerHTML = "";
+      complianceList.innerHTML = "";
+      complianceScore.textContent = "--";
+      loadingSpinner.style.display = "block";
+
+      // Fetch conversation analysis
+      fetch(`http://localhost:8000/analysis/${selectedConversationId}`)
+        .then(res => res.json())
+        .then(data => {
+          loadingSpinner.style.display = "none";
+
+          // Chat
+          data.emotions.forEach(msg => {
+            const div = document.createElement("div");
+            const cls = msg.sender === "agent" ? 'agent' : 'customer';
+            div.className = `message-box ${cls}`;
+            div.innerHTML = `
+              <p>${msg.text}</p>
+              <div class="emotion-tag">Emotion: ${msg.emotion.label} (${(msg.emotion.score * 100).toFixed(1)}%)</div>
+            `;
+            chatContainer.appendChild(div);
+          });
+
+          // Compliance
+          const compliance = data.compliance_score;
+          if (compliance && Object.keys(compliance).length > 0) {
+            complianceScore.textContent = compliance.score ?? "N/A";
+
+            Object.keys(compliance).forEach(ruleId => {
+              if (ruleId.startsWith("rule_")) {
+                const li = document.createElement("li");
+                li.className = `list-group-item d-flex justify-content-between align-items-center`;
+                li.innerHTML = `
+        <span><strong>Rule ${ruleId.split("_")[1]}:</strong> ${rulesMap[ruleId.split("_")[1]]}</span>
+        <span>${compliance[ruleId] === true ? '✅' :
+                    compliance[ruleId] === false ? '❌' :
+                      '➖'
+                  }</span>
+      `;
+                complianceList.appendChild(li);
+              }
+            });
+          } else {
+            complianceScore.textContent = "N/A";
+            const li = document.createElement("li");
+            li.className = "list-group-item text-danger";
+            li.textContent = "Compliance check failed or incomplete.";
+            complianceList.appendChild(li);
+          }
+
+
+          // Emotion chart
+          document.getElementById("emotionChart").src = `http://localhost:8000/chart/${selectedConversationId}`;
+        })
+        .catch(err => {
+          loadingSpinner.style.display = "none";
+          alert("Error loading data.");
+          console.error(err);
+        });
+    });
+  </script>
+</body>
+
+</html>

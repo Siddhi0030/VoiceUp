@@ -1,0 +1,85 @@
+/* General Background and Text */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Chat Message Styling */
+.message-box {
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.agent {
+    background-color: #1e88e5; /* Blue-ish bubble */
+    align-self: flex-start;
+}
+
+.customer {
+    background-color: #c62828; /* Reddish bubble */
+    align-self: flex-end;
+}
+
+.emotion-tag {
+    font-size: 0.8rem;
+    color: #ddd;
+    margin-top: 5px;
+}
+
+/* Flex column for chat container */
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Bootstrap Overrides */
+.container {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Dropdown, buttons, and other form elements */
+select.form-select,
+button.btn {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    border: 1px solid #555;
+}
+
+select.form-select:focus,
+button.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
+}
+
+/* List group for compliance */
+.list-group-item {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #444;
+}
+
+/* Spinner text */
+.spinner-border {
+    border-color: #42a5f5;
+}
+
+/* Force spinner rotation and visibility in dark mode */
+.spinner-border {
+    border-width: 0.25em;
+    border-top-color: #42a5f5 !important;  /* Bright blue top */
+    border-right-color: transparent !important;
+    border-bottom-color: transparent !important;
+    border-left-color: transparent !important;
+    animation: spinner-border 0.75s linear infinite;
+}
+
+/* Keyframes to ensure rotation */
+@keyframes spinner-border {
+  100% {
+    transform: rotate(360deg);
+  }
+}
